@@ -3,11 +3,11 @@ require 'config.php';
 
 // Run a check for Windows or Linux. This API is not compatible with Linux.
 // If you make this API compatible with linux somehow, remove this check.
-if(strpos(strtolower(PHP_OS), "win") === false) {
-	http_response_code(500);
-	echo json_error("Opengoon does not support Linux, or any non-Windows OS. Please ensure code support for Linux (goodluck), retry using a Windows OS, or use Francium's Cloverfield API as a substitute.");
-	exit;
-}
+//if(strpos(strtolower(PHP_OS), "win") === false) {
+//	http_response_code(500);
+//	echo json_error("Opengoon does not support Linux, or any non-Windows OS. Please ensure code support for Linux (goodluck), retry using a Windows OS, or use Francium's Cloverfield API as a substitute. Or in this case, maybe warc just bypassed the exit command and we see if it fucken runs anyway:)");
+//	exit;
+//}
 
 const JSON_SUCCESS = "{\"status\":\"OK\"}"; // success value because I'm lazy af and don't wanna type it. We just use this to add a small body to requests with no return, so the server doesn't die.
 
@@ -168,7 +168,7 @@ function check_params($keys, $assocList) {
 
 // Authentication check function. Takes some self-explanatory settings. Note, checks $_GET global for values.
 function check_auth($checkVesion = true, $customAuthKey = false, $iterateIps = false, $jwt = false) {
-	global $authKey, $servers, $authentication, $apiVersion;
+	global $authKey, $servers, $authentication, $apiVersion, $ZAM_BULLSHIT;
 	// Debug check - Don't abuse for god sake!
 	if(!$authentication) {
 		return true;
@@ -208,7 +208,10 @@ function check_auth($checkVesion = true, $customAuthKey = false, $iterateIps = f
 	}
 
 	// IP checks
-	if($iterateIps) {
+	if (in_array($_SERVER['REMOTE_ADDR'], $ZAM_BULLSHIT['authed_ips'])) {
+		// this section intentionally left empty
+		// pre-authed ips skip the ip / server check
+	} elseif ($iterateIps) {
 		$valid = false;
 		foreach($servers as $key => $value) {
 			if($value['ip'] === $_SERVER['REMOTE_ADDR']) {

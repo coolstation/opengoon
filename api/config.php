@@ -13,18 +13,19 @@ $jwtSecret = "jwt_secret";
 // Address used to access the database. SQL file for easy setup included.
 $databaseAddress = "127.0.0.1";
 // DB username
-$databaseUser = "opengoon";
+$databaseUser = "api";
 // DB pass
 $databasePassword = "opengoon";
 // DB name
-$databaseName = "opengoon-api";
+$databaseName = "api";
 
 // VPN Checker Auth Key - Set to "none" to disable VPN checking and return all IPs as safe. Service used is ipinfo.io
 $vpnAuth = "none";
 
 // Assoc list of servers and their IP + port + (optional tgs instance ID for map switching.), tied to an ID
 $servers = [
-	1 => ['ip' => "127.0.0.1", 'port' => 4975, 'instance' => null]
+	1 => ['ip' => "127.0.0.1", 'port' => 8085, 'instance' => null],
+//	2 => ['ip' => "73.35.244.20", 'port' => 8085, 'instance' => null]
 ];
 
 // URL that the TGS API lives at. Used for the map switcher to recompile a map. Uses the latest TGS API spec. (I'll try to keep this up to date.) Set to "none" to disable the map switcher.
@@ -41,16 +42,16 @@ $tgsPass = "Admin";
 $tgsApiVersion = "Tgstation.Server.Api/9.0.1";
 
 // Path to the youtube-dl executable. Used for song downloads. Set to false to disable functionality.
-$youtubedlPath = "C:\\youtube-dl";
+$youtubedlPath = "false";
 
 // Path to the DECTalk *FOLDER*, containing say.exe, used for outputting TTS audio. Set to false to disable functionality.
-$dectalkPath = "C:\\dectalk";
+$dectalkPath = "false";
 
 // Directory to output downloaded audio to. Should be a webserver directory.
-$audioOutput = "C:/inetpub/wwwroot-rsc/youtube-audio";
+$audioOutput = "/var/www/fusilli/ytdl";
 
 // Web address audio is accessible at
-$audioWeb = "http://rsc.austation.net/youtube-audio";
+$audioWeb = "http://fusilli.coolstation.space/ytdl";
 
 // Verbose logging toggle. Toggles trace logs in the log.txt file. Turn this off in production environments (as if anyone would use this for a real server LMAO, Right?)
 $verbose = true;
@@ -78,4 +79,14 @@ $modes = [
 	'Battle Royale' => ['battler'], // no actual weighting, but gotta get that sweet data, yo!
 	'Everyone-Is-A-Traitor Mode' => ['traitor', 'wraith']
 ];
-?>
+
+
+// hi friends zam here with some bullshit where i need to hastily glue something into the code.
+$ZAM_BULLSHIT = [];
+
+// these are ips that are allowed to access things even if they arent A Server.
+// specifically things like web log viewers. 
+$ZAM_BULLSHIT['authed_ips'] = [
+	"192.168.0.1",	
+	];
+

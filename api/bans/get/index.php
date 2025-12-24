@@ -5,7 +5,7 @@ require '../../utils.php';
 
 header("Content-Type: application/json");
 
-if(!check_auth()) {
+if(!check_auth(true, false, false, true)) {
 	http_response_code(401);
 	return;
 }
